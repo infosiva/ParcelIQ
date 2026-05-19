@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import './globals.css'
 import Navbar from '@/components/Navbar'
+import FloatingChat from '@/components/FloatingChat'
 
 export const metadata: Metadata = {
   title: 'ParcelIQ — Compare UK Shipping Prices Instantly',
@@ -20,6 +21,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <div className="bg-mesh" aria-hidden />
         <Navbar />
         <main>{children}</main>
+        <FloatingChat />
         <footer className="text-center py-8 text-sm text-blue-300/40 border-t border-blue-500/10">
           <p>© 2025 ParcelIQ · Prices are indicative — confirm at carrier website before shipping · <a href="/learn" className="text-blue-400 hover:text-blue-300">Shipping Guide</a> · <a href="/privacy" className="text-blue-400 hover:text-blue-300">Privacy</a></p>
         </footer>
