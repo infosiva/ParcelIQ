@@ -117,6 +117,19 @@ export default function Home() {
             <CompareForm />
           </div>
         </div>
+        {/* ── Trust bar (Parcel2Go pattern) ── */}
+        <div className="flex flex-wrap items-center justify-center gap-6 pt-5 mt-5 border-t border-blue-500/10 text-xs text-blue-200/50">
+          <div className="flex items-center gap-1.5">
+            <span className="text-amber-400 font-bold">★★★★★</span>
+            <span>Trustpilot <strong className="text-white">Excellent</strong></span>
+          </div>
+          <span className="hidden sm:block w-px h-4 bg-white/10" />
+          <span>📦 <strong className="text-white">83M+</strong> parcels compared</span>
+          <span className="hidden sm:block w-px h-4 bg-white/10" />
+          <span>💰 From <strong className="text-white">£2.39</strong></span>
+          <span className="hidden sm:block w-px h-4 bg-white/10" />
+          <span>🔒 Lowest price guarantee</span>
+        </div>
       </section>
 
       {/* Features */}
