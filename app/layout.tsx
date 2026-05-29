@@ -6,8 +6,8 @@ import Script from 'next/script'
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://parceliq.app'),
-  title: 'ParcelIQ — Compare UK Shipping Prices Instantly',
-  description: 'Compare Royal Mail, DPD, Evri, DHL and more. AI picks the best carrier for your parcel. Free, instant, no login.',
+  title: 'ParcelIQ — Cheapest UK Parcel, Found Instantly',
+  description: 'Enter weight and destination — AI compares Royal Mail, DPD, Evri, DHL and picks the best-value carrier for your parcel. Free, instant, no login.',
   keywords: ['parcel comparison UK', 'cheapest shipping', 'DPD vs Royal Mail', 'Evri price', 'parcel price checker'],
   openGraph: {
     title: 'ParcelIQ — UK Shipping Price Comparison',
