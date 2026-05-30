@@ -17,6 +17,7 @@ export interface CarrierQuote {
   affiliateUrl: string
   recommended?: boolean
   note?:        string
+  aiReason?:   string
 }
 
 export interface ShipmentParams {
@@ -211,7 +212,20 @@ export function getQuotes(p: ShipmentParams): CarrierQuote[] {
     return scoreA - scoreB
   })
 
-  sorted[0].recommended = true
+  const winner = sorted[0]
+  winner.recommended = true
+
+  // Generate 1-line AI reasoning for the badge
+  const runner = sorted[1]
+  const saving = runner ? `Saves £${(runner.price - winner.price).toFixed(2)} vs next option. ` : ''
+  if (p.priority === 'cheapest') {
+    winner.aiReason = `${saving}Cheapest for ${p.weightKg <= 2 ? `parcels under 2kg` : `${p.weightKg}kg parcels`} to ${p.isInternational ? 'international destinations' : 'mainland UK'}.`
+  } else if (p.priority === 'fastest') {
+    winner.aiReason = `Fastest delivery — ${winner.deliveryText}. ${saving}Best when time matters.`
+  } else {
+    winner.aiReason = `Best value pick — ${winner.deliveryText} with full tracking. ${saving}Balanced speed and price.`
+  }
+
   return sorted
 }
 

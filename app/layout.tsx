@@ -6,12 +6,12 @@ import Script from 'next/script'
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://parceliq.app'),
-  title: 'ParcelIQ — Cheapest UK Parcel, Found Instantly',
-  description: 'Enter weight and destination — AI compares Royal Mail, DPD, Evri, DHL and picks the best-value carrier for your parcel. Free, instant, no login.',
-  keywords: ['parcel comparison UK', 'cheapest shipping', 'DPD vs Royal Mail', 'Evri price', 'parcel price checker'],
+  title: 'ParcelIQ — UK Parcel Price Comparison | Find Cheapest Shipping',
+  description: 'Find the cheapest UK shipping in 10 seconds — AI explains why one carrier beats the rest. Compare Royal Mail, Evri, DPD, DHL, Parcelforce and more. Free, instant, no login.',
+  keywords: ['parcel comparison UK', 'cheapest UK shipping', 'DPD vs Royal Mail', 'Evri price', 'parcel price checker', 'UK shipping comparison', 'Royal Mail vs Evri'],
   openGraph: {
-    title: 'ParcelIQ — UK Shipping Price Comparison',
-    description: 'AI-powered carrier comparison. Find the cheapest, fastest, or best-value shipping in seconds.',
+    title: 'ParcelIQ — UK Parcel Price Comparison | Find Cheapest Shipping',
+    description: 'AI explains why one carrier beats the rest. Compare Royal Mail, Evri, DPD, DHL and more — free, instant, no login.',
     type: 'website',
   },
 }

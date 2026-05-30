@@ -1,5 +1,5 @@
 'use client'
-import { ExternalLink, Zap, PoundSterling, ShieldCheck, Leaf, Clock, Star, Truck } from 'lucide-react'
+import { ExternalLink, Zap, PoundSterling, ShieldCheck, Leaf, Clock, Star, Truck, Trophy } from 'lucide-react'
 import type { CarrierQuote } from '@/lib/carriers'
 
 const BADGE_CONFIG = {
@@ -24,23 +24,45 @@ export default function QuoteCard({ quote, rank }: Props) {
       className={`card-sm fade-up`}
       style={{
         animationDelay: `${rank * 0.06}s`,
-        border: isRec ? '1px solid rgba(16,185,129,0.35)' : undefined,
-        background: isRec ? 'linear-gradient(135deg, rgba(16,185,129,0.06), var(--surface-2))' : undefined,
+        border: isRec ? '1px solid rgba(16,185,129,0.5)' : undefined,
+        background: isRec ? 'linear-gradient(135deg, rgba(16,185,129,0.08), var(--surface-2))' : undefined,
+        boxShadow: isRec ? '0 0 0 3px rgba(16,185,129,0.12), 0 4px 24px rgba(16,185,129,0.10)' : undefined,
         padding: '1.1rem 1.25rem',
         position: 'relative',
       }}
     >
-      {/* Recommended crown */}
+      {/* AI Pick badge — top of recommended card */}
       {isRec && (
-        <div style={{
-          position: 'absolute', top: -12, left: '50%', transform: 'translateX(-50%)',
-          background: 'var(--green)', color: '#fff',
-          padding: '2px 12px', borderRadius: 999, fontSize: '0.65rem', fontWeight: 700,
-          letterSpacing: '0.06em', whiteSpace: 'nowrap',
-          display: 'flex', alignItems: 'center', gap: 4,
-        }}>
-          <Star size={9} fill="currentColor" /> Best pick
-        </div>
+        <>
+          <div style={{
+            position: 'absolute', top: -14, left: '50%', transform: 'translateX(-50%)',
+            background: 'linear-gradient(90deg, #059669, #10b981)',
+            color: '#fff',
+            padding: '3px 14px', borderRadius: 999, fontSize: '0.65rem', fontWeight: 700,
+            letterSpacing: '0.06em', whiteSpace: 'nowrap',
+            display: 'flex', alignItems: 'center', gap: 5,
+            boxShadow: '0 2px 8px rgba(16,185,129,0.35)',
+          }}>
+            <Trophy size={9} fill="currentColor" /> AI Pick · Best for this parcel
+          </div>
+          {/* 1-line AI reasoning */}
+          <div style={{
+            marginBottom: '0.75rem',
+            marginTop: '0.5rem',
+            padding: '0.4rem 0.75rem',
+            background: 'rgba(16,185,129,0.08)',
+            border: '1px solid rgba(16,185,129,0.2)',
+            borderRadius: 8,
+            fontSize: '0.72rem',
+            color: '#6ee7b7',
+            display: 'flex',
+            alignItems: 'center',
+            gap: 6,
+          }}>
+            <Trophy size={10} style={{ flexShrink: 0, color: '#10b981' }} />
+            {quote.aiReason ?? `Cheapest option for parcels under 2kg to mainland UK`}
+          </div>
+        </>
       )}
 
       <div style={{ display: 'flex', alignItems: 'center', gap: '0.85rem' }}>

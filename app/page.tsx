@@ -1,6 +1,8 @@
+'use client'
 import CompareForm from '@/components/CompareForm'
 import { Package2, ShieldCheck, Zap, TrendingDown, Globe, Star, ArrowRight } from 'lucide-react'
 import Link from 'next/link'
+import { motion } from 'framer-motion'
 
 const CARRIERS = [
   { logo: '👑', name: 'Royal Mail', color: 'from-red-500/20 to-red-600/10 border-red-500/20 text-red-300' },
@@ -72,19 +74,27 @@ export default function Home() {
 
         <div className="relative z-10 grid md:grid-cols-2 gap-8 items-start">
           {/* Left */}
-          <div>
+          <motion.div
+            initial={{ opacity: 0, y: 24 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, ease: [0.23, 1, 0.32, 1] }}
+          >
             <div className="inline-flex items-center gap-2 bg-blue-500/10 border border-blue-400/20 rounded-full px-4 py-1.5 text-xs font-semibold text-blue-300 mb-4">
               <span className="w-2 h-2 rounded-full bg-blue-400 animate-pulse" />
               Live · 7 UK carriers compared
             </div>
 
             <h1 className="text-3xl md:text-5xl font-black tracking-tight mb-3 leading-tight">
-              Ship smarter.<br />
-              <span className="bg-gradient-to-r from-blue-400 to-violet-400 bg-clip-text text-transparent">Pay less.</span>
+              Find the cheapest UK shipping<br />
+              <span className="bg-gradient-to-r from-blue-400 to-violet-400 bg-clip-text text-transparent">in 10 seconds.</span>
             </h1>
 
-            <p className="text-blue-100/70 text-base md:text-lg mb-6 max-w-md leading-relaxed">
-              Compare Royal Mail, DPD, DHL, Evri and more. AI finds the cheapest, fastest, or best-value carrier instantly.
+            <p className="text-blue-100/70 text-base md:text-lg mb-4 max-w-md leading-relaxed">
+              AI explains why one carrier beats the rest for your parcel.
+            </p>
+
+            <p className="text-blue-100/50 text-sm mb-6 max-w-md leading-relaxed">
+              Compare Royal Mail, Evri, DPD, DHL and more — with AI that picks the winner for your parcel.
             </p>
 
             {/* Carriers */}
@@ -96,26 +106,42 @@ export default function Home() {
               ))}
             </div>
 
-            {/* Stats */}
-            <div className="flex gap-6">
-              {STATS.map(s => (
-                <div key={s.label} className="bg-white/5 border border-white/10 rounded-xl px-4 py-2.5 text-center">
-                  <p className="text-xl font-black text-white">{s.value}</p>
-                  <p className="text-xs text-blue-300 font-semibold">{s.label}</p>
-                  <p className="text-[10px] text-blue-200/50">{s.sub}</p>
-                </div>
+            {/* Stats strip */}
+            <div className="flex flex-wrap gap-2 mb-4">
+              {['50k+ parcels compared', '7 carriers', 'avg 23% saving'].map((pill) => (
+                <span key={pill} className="inline-flex items-center gap-1.5 bg-indigo-900/60 border border-indigo-500/20 text-indigo-300 text-xs font-semibold rounded-full px-3 py-1.5">
+                  {pill}
+                </span>
               ))}
             </div>
-          </div>
+
+            {/* Trust badges */}
+            <div className="flex flex-wrap gap-3">
+              {[
+                { icon: '🔒', label: 'No account needed' },
+                { icon: '📦', label: 'All UK carriers' },
+                { icon: '⚡', label: 'Real-time prices' },
+              ].map((b) => (
+                <span key={b.label} className="text-xs text-blue-200/50 flex items-center gap-1">
+                  <span>{b.icon}</span> {b.label}
+                </span>
+              ))}
+            </div>
+          </motion.div>
 
           {/* Form card */}
-          <div className="bg-white/5 border border-blue-400/15 rounded-2xl p-6 backdrop-blur-sm">
+          <motion.div
+            className="bg-white/5 border border-blue-400/15 rounded-2xl p-6 backdrop-blur-sm"
+            initial={{ opacity: 0, y: 24 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.1, ease: [0.23, 1, 0.32, 1] }}
+          >
             <div className="flex items-center gap-2 mb-4">
               <Package2 size={18} className="text-blue-400" />
               <span className="font-bold text-sm text-white">Get instant quotes</span>
             </div>
             <CompareForm />
-          </div>
+          </motion.div>
         </div>
         {/* ── Trust bar (Parcel2Go pattern) ── */}
         <div className="flex flex-wrap items-center justify-center gap-6 pt-5 mt-5 border-t border-blue-500/10 text-xs text-blue-200/50">
