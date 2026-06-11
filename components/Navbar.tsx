@@ -10,8 +10,9 @@ export default function Navbar() {
     <>
       <nav style={{
         position: 'fixed', top: 0, left: 0, right: 0, zIndex: 50,
-        background: 'rgba(6,9,15,0.80)', backdropFilter: 'blur(12px)',
-        borderBottom: '1px solid var(--border-2)',
+        background: 'rgba(240,253,244,0.85)', backdropFilter: 'blur(16px)',
+        borderBottom: '1px solid rgba(5,150,105,0.12)',
+        boxShadow: '0 1px 0 rgba(5,150,105,0.06)',
       }}>
         <div style={{ maxWidth: 1100, margin: '0 auto', padding: '0 1.25rem', height: 56, display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
           <Link href="/" style={{ display: 'flex', alignItems: 'center', gap: 8, textDecoration: 'none' }}>

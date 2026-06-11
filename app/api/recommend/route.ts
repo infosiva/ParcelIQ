@@ -58,12 +58,14 @@ export async function POST(req: NextRequest) {
           enhancedRec = groqData.choices[0].message.content.trim()
         }
       }
-    } catch {
+    } catch (groqErr) {
+      console.error('[parceliq][recommend][groq]', groqErr)
       // fall through to static recommendation
     }
 
     return NextResponse.json({ quotes, recommendation: enhancedRec })
   } catch (e) {
+    console.error('[parceliq][recommend]', e)
     return NextResponse.json({ error: String(e) }, { status: 400 })
   }
 }

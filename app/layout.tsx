@@ -13,6 +13,7 @@ export const metadata: Metadata = {
     title: 'ParcelIQ — UK Parcel Price Comparison | Find Cheapest Shipping',
     description: 'AI explains why one carrier beats the rest. Compare Royal Mail, Evri, DPD, DHL and more — free, instant, no login.',
     type: 'website',
+    images: [{ url: '/og.png', width: 1200, height: 630, alt: 'ParcelIQ — UK parcel price comparison' }],
   },
 }
 
@@ -44,8 +45,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <Navbar />
         <main>{children}</main>
         <FloatingChat />
-        <footer className="text-center py-8 text-sm text-blue-300/40 border-t border-blue-500/10">
-          <p>© 2025 ParcelIQ · Prices are indicative — confirm at carrier website before shipping · <a href="/learn" className="text-blue-400 hover:text-blue-300">Shipping Guide</a> · <a href="/privacy" className="text-blue-400 hover:text-blue-300">Privacy</a></p>
+        <footer style={{ textAlign: 'center', padding: '2rem 1rem', fontSize: '0.8125rem', color: 'rgba(6,78,59,0.40)', borderTop: '1px solid rgba(5,150,105,0.10)' }}>
+          <p>© 2025 ParcelIQ · Prices are indicative — confirm at carrier website before shipping · <a href="/learn" style={{ color: 'rgba(5,150,105,0.70)', textDecoration: 'none' }}>Shipping Guide</a> · <a href="/privacy" style={{ color: 'rgba(5,150,105,0.70)', textDecoration: 'none' }}>Privacy</a></p>
         </footer>
         <Script defer data-site="parceliq.app" src="http://31.97.56.148:3098/t.js" strategy="afterInteractive" />
       </body>

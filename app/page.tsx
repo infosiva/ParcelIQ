@@ -1,17 +1,18 @@
 'use client'
 import CompareForm from '@/components/CompareForm'
-import { Package2, ShieldCheck, Zap, TrendingDown, Globe, Star, ArrowRight } from 'lucide-react'
+import { Package2, ShieldCheck, Zap, TrendingDown, Globe, ArrowRight, CheckCircle2, Clock, MapPin } from 'lucide-react'
 import Link from 'next/link'
-import { motion } from 'framer-motion'
+import { motion, AnimatePresence } from 'framer-motion'
+import { useState, useEffect } from 'react'
 
 const CARRIERS = [
-  { logo: '👑', name: 'Royal Mail', color: 'from-red-500/20 to-red-600/10 border-red-500/20 text-red-300' },
-  { logo: '📦', name: 'Evri', color: 'from-purple-500/20 to-purple-600/10 border-purple-500/20 text-purple-300' },
-  { logo: '🚐', name: 'DPD', color: 'from-red-400/20 to-orange-500/10 border-orange-500/20 text-orange-300' },
-  { logo: '🟡', name: 'DHL Express', color: 'from-yellow-500/20 to-yellow-600/10 border-yellow-500/20 text-yellow-300' },
-  { logo: '🔴', name: 'Parcelforce', color: 'from-rose-500/20 to-rose-600/10 border-rose-500/20 text-rose-300' },
-  { logo: '🏪', name: 'Collect+', color: 'from-teal-500/20 to-teal-600/10 border-teal-500/20 text-teal-300' },
-  { logo: '🟤', name: 'UPS', color: 'from-amber-500/20 to-amber-600/10 border-amber-500/20 text-amber-300' },
+  { logo: '👑', name: 'Royal Mail' },
+  { logo: '📦', name: 'Evri' },
+  { logo: '🚐', name: 'DPD' },
+  { logo: '🟡', name: 'DHL Express' },
+  { logo: '🔴', name: 'Parcelforce' },
+  { logo: '🏪', name: 'Collect+' },
+  { logo: '🟤', name: 'UPS' },
 ]
 
 const FEATURES = [
@@ -19,33 +20,33 @@ const FEATURES = [
     icon: <TrendingDown size={22} />,
     title: 'Real prices, no fluff',
     body: 'Live rate cards from 7 carriers. The actual price you\'ll pay, not a teaser.',
-    gradient: 'from-blue-500/10 to-indigo-500/10',
-    border: 'border-blue-500/20',
-    iconColor: 'text-blue-400',
+    bg: 'rgba(5,150,105,0.06)',
+    border: 'rgba(5,150,105,0.15)',
+    iconColor: '#059669',
   },
   {
     icon: <Zap size={22} />,
     title: 'AI picks the winner',
     body: 'Cheapest, fastest, or best all-rounder — AI explains the recommendation.',
-    gradient: 'from-violet-500/10 to-purple-500/10',
-    border: 'border-violet-500/20',
-    iconColor: 'text-violet-400',
+    bg: 'rgba(4,120,87,0.06)',
+    border: 'rgba(4,120,87,0.15)',
+    iconColor: '#047857',
   },
   {
     icon: <Globe size={22} />,
     title: 'UK & international',
     body: 'Domestic and worldwide quotes in one view. Customs info included.',
-    gradient: 'from-emerald-500/10 to-teal-500/10',
-    border: 'border-emerald-500/20',
-    iconColor: 'text-emerald-400',
+    bg: 'rgba(16,185,129,0.06)',
+    border: 'rgba(16,185,129,0.15)',
+    iconColor: '#10b981',
   },
   {
     icon: <ShieldCheck size={22} />,
     title: 'Tracking & cover',
     body: 'We flag which carriers include tracking, insurance, and signature.',
-    gradient: 'from-amber-500/10 to-orange-500/10',
-    border: 'border-amber-500/20',
-    iconColor: 'text-amber-400',
+    bg: 'rgba(5,150,105,0.04)',
+    border: 'rgba(5,150,105,0.12)',
+    iconColor: '#059669',
   },
 ]
 
@@ -56,147 +57,284 @@ const REVIEWS = [
 ]
 
 const STATS = [
-  { value: '7', label: 'Carriers', sub: 'compared live' },
-  { value: 'Free', label: 'Always', sub: 'no signup needed' },
-  { value: '30s', label: 'To compare', sub: 'average time' },
+  { value: '7', label: 'Carriers compared live' },
+  { value: 'Free', label: 'Always — no signup needed' },
+  { value: '30s', label: 'Average comparison time' },
 ]
+
+// Animated tracking demo data
+const TRACKING_STEPS = [
+  { icon: <CheckCircle2 size={14} />, label: 'Order collected', time: '09:12', done: true },
+  { icon: <MapPin size={14} />, label: 'In transit — Birmingham hub', time: '11:47', done: true },
+  { icon: <Clock size={14} />, label: 'Out for delivery', time: '13:20', done: true },
+  { icon: <Package2 size={14} />, label: 'Delivered — front door', time: '14:05', done: false },
+]
+
+const QUOTE_ROWS = [
+  { logo: '🚐', name: 'DPD Next Day', price: '£4.99', tag: 'Fastest', tagColor: '#059669', tagBg: 'rgba(5,150,105,0.10)' },
+  { logo: '📦', name: 'Evri Standard', price: '£2.89', tag: 'Cheapest', tagColor: '#d97706', tagBg: 'rgba(217,119,6,0.10)' },
+  { logo: '👑', name: 'Royal Mail 2nd', price: '£3.40', tag: 'Reliable', tagColor: '#0284c7', tagBg: 'rgba(2,132,199,0.10)' },
+]
+
+function TrackingDemo() {
+  const [activeStep, setActiveStep] = useState(0)
+  const [showQuotes, setShowQuotes] = useState(false)
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setActiveStep(s => {
+        if (s < TRACKING_STEPS.length - 1) return s + 1
+        setShowQuotes(true)
+        return s
+      })
+    }, 1200)
+    const reset = setTimeout(() => {
+      clearInterval(interval)
+      setTimeout(() => {
+        setActiveStep(0)
+        setShowQuotes(false)
+      }, 3000)
+    }, 6000)
+    return () => { clearInterval(interval); clearTimeout(reset) }
+  }, [])
+
+  return (
+    <div style={{
+      background: '#ffffff',
+      border: '1px solid rgba(5,150,105,0.15)',
+      borderRadius: 20,
+      padding: 24,
+      boxShadow: '0 4px 32px rgba(5,150,105,0.08)',
+    }}>
+      {/* Header */}
+      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 20 }}>
+        <div>
+          <div style={{ fontSize: 11, fontWeight: 600, color: '#059669', letterSpacing: '0.08em', textTransform: 'uppercase', marginBottom: 2 }}>Live tracking</div>
+          <div style={{ fontSize: 14, fontWeight: 700, color: '#064e3b' }}>Parcel #PQ-84921</div>
+        </div>
+        <div style={{ display: 'flex', alignItems: 'center', gap: 6, background: 'rgba(5,150,105,0.08)', borderRadius: 20, padding: '4px 10px' }}>
+          <span style={{ width: 7, height: 7, borderRadius: '50%', background: '#059669', display: 'inline-block', animation: 'trackingPulse 1.4s ease infinite' }} />
+          <span style={{ fontSize: 11, fontWeight: 600, color: '#059669' }}>In transit</span>
+        </div>
+      </div>
+
+      {/* Timeline */}
+      <div style={{ display: 'flex', flexDirection: 'column', gap: 0, marginBottom: 20 }}>
+        {TRACKING_STEPS.map((step, i) => (
+          <div key={i} style={{ display: 'flex', alignItems: 'flex-start', gap: 12, position: 'relative' }}>
+            {/* line */}
+            {i < TRACKING_STEPS.length - 1 && (
+              <div style={{
+                position: 'absolute', left: 13, top: 24, width: 2, height: 28,
+                background: i < activeStep ? '#059669' : 'rgba(5,150,105,0.15)',
+                transition: 'background 0.4s ease',
+              }} />
+            )}
+            {/* dot */}
+            <motion.div
+              animate={i === activeStep ? { scale: [1, 1.2, 1] } : {}}
+              transition={{ duration: 0.4 }}
+              style={{
+                width: 28, height: 28, borderRadius: '50%', flexShrink: 0,
+                background: i <= activeStep ? '#059669' : '#f0fdf4',
+                border: `2px solid ${i <= activeStep ? '#059669' : 'rgba(5,150,105,0.20)'}`,
+                display: 'flex', alignItems: 'center', justifyContent: 'center',
+                color: i <= activeStep ? '#fff' : 'rgba(5,150,105,0.4)',
+                transition: 'all 0.4s ease',
+                marginBottom: 20,
+              }}
+            >
+              {step.icon}
+            </motion.div>
+            {/* text */}
+            <div style={{ paddingTop: 4, paddingBottom: 20 }}>
+              <div style={{ fontSize: 13, fontWeight: i <= activeStep ? 600 : 400, color: i <= activeStep ? '#064e3b' : '#6b7280', transition: 'all 0.3s' }}>{step.label}</div>
+              <div style={{ fontSize: 11, color: 'rgba(6,78,59,0.4)', marginTop: 1 }}>{step.time}</div>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      {/* Quote comparison mini panel */}
+      <AnimatePresence>
+        {showQuotes && (
+          <motion.div
+            initial={{ opacity: 0, y: 8 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: 8 }}
+            transition={{ duration: 0.3, ease: [0.23, 1, 0.32, 1] }}
+          >
+            <div style={{ fontSize: 11, fontWeight: 600, color: '#059669', letterSpacing: '0.08em', textTransform: 'uppercase', marginBottom: 10 }}>
+              AI quotes for next shipment
+            </div>
+            {QUOTE_ROWS.map((q, i) => (
+              <div key={i} style={{
+                display: 'flex', alignItems: 'center', justifyContent: 'space-between',
+                padding: '8px 12px', borderRadius: 10, marginBottom: 6,
+                background: i === 0 ? 'rgba(5,150,105,0.06)' : '#f8fffe',
+                border: `1px solid ${i === 0 ? 'rgba(5,150,105,0.20)' : 'rgba(5,150,105,0.08)'}`,
+              }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+                  <span style={{ fontSize: 16 }}>{q.logo}</span>
+                  <span style={{ fontSize: 12, fontWeight: 600, color: '#064e3b' }}>{q.name}</span>
+                </div>
+                <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+                  <span style={{ fontSize: 11, fontWeight: 600, color: q.tagColor, background: q.tagBg, borderRadius: 20, padding: '2px 8px' }}>{q.tag}</span>
+                  <span style={{ fontSize: 13, fontWeight: 800, color: '#064e3b' }}>{q.price}</span>
+                </div>
+              </div>
+            ))}
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </div>
+  )
+}
 
 export default function Home() {
   return (
     <div className="max-w-6xl mx-auto px-4 py-6">
 
-      {/* Hero */}
-      <section className="relative mb-8 rounded-3xl overflow-hidden bg-gradient-to-br from-slate-900 via-blue-950 to-indigo-950 p-6 md:p-10 text-white shadow-2xl border border-blue-500/10">
-        <div className="absolute inset-0 pointer-events-none">
-          <div className="absolute top-0 right-0 w-80 h-80 rounded-full bg-blue-500/10 blur-3xl -translate-y-1/2" />
-          <div className="absolute bottom-0 left-0 w-64 h-64 rounded-full bg-violet-500/10 blur-3xl translate-y-1/2" />
-        </div>
+      {/* Hero — split layout */}
+      <section className="relative mb-10 rounded-3xl overflow-hidden p-6 md:p-10"
+        style={{ background: 'linear-gradient(135deg, #f0fdf4 0%, #ecfdf5 100%)', border: '1px solid rgba(5,150,105,0.12)', boxShadow: '0 4px 40px rgba(5,150,105,0.06)' }}>
 
-        <div className="relative z-10 grid md:grid-cols-2 gap-8 items-start">
-          {/* Left */}
+        <div className="relative z-10 grid lg:grid-cols-2 gap-10 items-start">
+          {/* Left — headline + CTA */}
           <motion.div
             initial={{ opacity: 0, y: 24 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, ease: [0.23, 1, 0.32, 1] }}
           >
-            <div className="inline-flex items-center gap-2 bg-blue-500/10 border border-blue-400/20 rounded-full px-4 py-1.5 text-xs font-semibold text-blue-300 mb-4">
-              <span className="w-2 h-2 rounded-full bg-blue-400 animate-pulse" />
-              Live · 7 UK carriers compared
+            <div style={{ display: 'inline-flex', alignItems: 'center', gap: 8, background: 'rgba(5,150,105,0.10)', border: '1px solid rgba(5,150,105,0.20)', borderRadius: 999, padding: '6px 14px', marginBottom: 16 }}>
+              <span style={{ width: 7, height: 7, borderRadius: '50%', background: '#059669', display: 'inline-block', animation: 'trackingPulse 1.4s ease infinite' }} />
+              <span style={{ fontSize: 12, fontWeight: 600, color: '#059669' }}>Live · 7 UK carriers compared</span>
             </div>
 
-            <h1 className="text-3xl md:text-5xl font-black tracking-tight mb-3 leading-tight">
-              Find the cheapest UK shipping<br />
-              <span className="bg-gradient-to-r from-blue-400 to-violet-400 bg-clip-text text-transparent">in 10 seconds.</span>
+            <h1 style={{ fontSize: 'clamp(2rem,5vw,3.2rem)', fontWeight: 900, letterSpacing: '-0.03em', lineHeight: 1.12, color: '#064e3b', marginBottom: 14 }}>
+              Find the cheapest UK shipping
+              <span style={{ display: 'block', background: 'linear-gradient(90deg,#059669,#047857)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>
+                in 10 seconds.
+              </span>
             </h1>
 
-            <p className="text-blue-100/70 text-base md:text-lg mb-4 max-w-md leading-relaxed">
+            <p style={{ fontSize: '1.05rem', color: 'rgba(6,78,59,0.70)', lineHeight: 1.65, marginBottom: 8, maxWidth: 440 }}>
               AI explains why one carrier beats the rest for your parcel.
             </p>
-
-            <p className="text-blue-100/50 text-sm mb-6 max-w-md leading-relaxed">
-              Compare Royal Mail, Evri, DPD, DHL and more — with AI that picks the winner for your parcel.
+            <p style={{ fontSize: '0.9rem', color: 'rgba(6,78,59,0.50)', lineHeight: 1.6, marginBottom: 24, maxWidth: 440 }}>
+              Compare Royal Mail, Evri, DPD, DHL and more — free, instant, no login.
             </p>
 
-            {/* Carriers */}
-            <div className="flex flex-wrap gap-2 mb-6">
+            {/* Carrier chips */}
+            <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8, marginBottom: 24 }}>
               {CARRIERS.map(c => (
-                <div key={c.name} className={`flex items-center gap-1.5 bg-gradient-to-r ${c.color} border rounded-lg px-3 py-1.5 text-xs font-semibold backdrop-blur-sm`}>
+                <div key={c.name} style={{
+                  display: 'flex', alignItems: 'center', gap: 6,
+                  background: '#fff', border: '1px solid rgba(5,150,105,0.15)',
+                  borderRadius: 8, padding: '6px 12px', fontSize: 12, fontWeight: 600, color: '#064e3b',
+                }}>
                   <span>{c.logo}</span> {c.name}
                 </div>
               ))}
             </div>
 
             {/* Stats strip */}
-            <div className="flex flex-wrap gap-2 mb-4">
-              {['50k+ parcels compared', '7 carriers', 'avg 23% saving'].map((pill) => (
-                <span key={pill} className="inline-flex items-center gap-1.5 bg-indigo-900/60 border border-indigo-500/20 text-indigo-300 text-xs font-semibold rounded-full px-3 py-1.5">
-                  {pill}
-                </span>
+            <div style={{ display: 'flex', flexWrap: 'wrap', gap: 20, marginBottom: 24 }}>
+              {STATS.map(s => (
+                <div key={s.label}>
+                  <div style={{ fontSize: '1.4rem', fontWeight: 900, color: '#059669', letterSpacing: '-0.02em' }}>{s.value}</div>
+                  <div style={{ fontSize: '0.75rem', color: 'rgba(6,78,59,0.55)', marginTop: 1 }}>{s.label}</div>
+                </div>
               ))}
             </div>
 
             {/* Trust badges */}
-            <div className="flex flex-wrap gap-3">
+            <div style={{ display: 'flex', flexWrap: 'wrap', gap: 16 }}>
               {[
                 { icon: '🔒', label: 'No account needed' },
                 { icon: '📦', label: 'All UK carriers' },
                 { icon: '⚡', label: 'Real-time prices' },
-              ].map((b) => (
-                <span key={b.label} className="text-xs text-blue-200/50 flex items-center gap-1">
+              ].map(b => (
+                <span key={b.label} style={{ fontSize: 12, color: 'rgba(6,78,59,0.55)', display: 'flex', alignItems: 'center', gap: 5 }}>
                   <span>{b.icon}</span> {b.label}
                 </span>
               ))}
             </div>
           </motion.div>
 
-          {/* Form card */}
+          {/* Right — animated parcel tracking demo */}
           <motion.div
-            className="bg-white/5 border border-blue-400/15 rounded-2xl p-6 backdrop-blur-sm"
             initial={{ opacity: 0, y: 24 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.1, ease: [0.23, 1, 0.32, 1] }}
+            transition={{ duration: 0.5, delay: 0.12, ease: [0.23, 1, 0.32, 1] }}
           >
-            <div className="flex items-center gap-2 mb-4">
-              <Package2 size={18} className="text-blue-400" />
-              <span className="font-bold text-sm text-white">Get instant quotes</span>
-            </div>
-            <CompareForm />
+            <TrackingDemo />
           </motion.div>
         </div>
-        {/* ── Trust bar (Parcel2Go pattern) ── */}
-        <div className="flex flex-wrap items-center justify-center gap-6 pt-5 mt-5 border-t border-blue-500/10 text-xs text-blue-200/50">
-          <div className="flex items-center gap-1.5">
-            <span className="text-amber-400 font-bold">★★★★★</span>
-            <span>Trustpilot <strong className="text-white">Excellent</strong></span>
+
+        {/* Compare form */}
+        <motion.div
+          initial={{ opacity: 0, y: 16 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.2, ease: [0.23, 1, 0.32, 1] }}
+          style={{ marginTop: 28, padding: 24, background: '#fff', borderRadius: 16, border: '1px solid rgba(5,150,105,0.15)' }}
+        >
+          <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 16 }}>
+            <Package2 size={18} style={{ color: '#059669' }} />
+            <span style={{ fontWeight: 700, fontSize: 14, color: '#064e3b' }}>Get instant quotes</span>
           </div>
-          <span className="hidden sm:block w-px h-4 bg-white/10" />
-          <span>📦 <strong className="text-white">83M+</strong> parcels compared</span>
-          <span className="hidden sm:block w-px h-4 bg-white/10" />
-          <span>💰 From <strong className="text-white">£2.39</strong></span>
-          <span className="hidden sm:block w-px h-4 bg-white/10" />
-          <span>🔒 Lowest price guarantee</span>
-        </div>
+          <CompareForm />
+        </motion.div>
       </section>
 
       {/* Features */}
       <section className="mb-10">
-        <div className="flex items-center justify-between mb-5">
-          <h2 className="text-lg font-bold text-white">⚡ Why ParcelIQ?</h2>
-          <Link href="/compare" className="text-xs text-blue-400 hover:text-blue-300 flex items-center gap-1">
+        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 20 }}>
+          <h2 style={{ fontSize: '1.1rem', fontWeight: 800, color: '#064e3b' }}>⚡ Why ParcelIQ?</h2>
+          <Link href="/compare" style={{ fontSize: 12, color: '#059669', display: 'flex', alignItems: 'center', gap: 4, textDecoration: 'none', fontWeight: 600 }}>
             Compare now <ArrowRight size={12} />
           </Link>
         </div>
         <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
           {FEATURES.map(f => (
-            <div
-              key={f.title}
-              className={`bg-gradient-to-br ${f.gradient} border ${f.border} rounded-2xl p-4 backdrop-blur-sm hover:scale-[1.02] transition-transform`}
+            <div key={f.title} style={{
+              background: f.bg, border: `1px solid ${f.border}`,
+              borderRadius: 16, padding: 18,
+              transition: 'transform 0.15s, box-shadow 0.15s',
+            }}
+              onMouseEnter={e => { (e.currentTarget as HTMLDivElement).style.transform = 'scale(1.02)'; (e.currentTarget as HTMLDivElement).style.boxShadow = '0 4px 16px rgba(5,150,105,0.10)' }}
+              onMouseLeave={e => { (e.currentTarget as HTMLDivElement).style.transform = 'scale(1)'; (e.currentTarget as HTMLDivElement).style.boxShadow = 'none' }}
             >
-              <div className={`${f.iconColor} mb-3`}>{f.icon}</div>
-              <h3 className="font-bold text-sm text-white mb-1.5">{f.title}</h3>
-              <p className="text-xs text-blue-100/60 leading-relaxed">{f.body}</p>
+              <div style={{ color: f.iconColor, marginBottom: 12 }}>{f.icon}</div>
+              <h3 style={{ fontWeight: 700, fontSize: 13, color: '#064e3b', marginBottom: 6 }}>{f.title}</h3>
+              <p style={{ fontSize: 12, color: 'rgba(6,78,59,0.60)', lineHeight: 1.55 }}>{f.body}</p>
             </div>
           ))}
         </div>
       </section>
 
-      {/* Compare CTA band */}
-      <section className="relative overflow-hidden bg-gradient-to-r from-blue-600 via-indigo-600 to-violet-600 rounded-3xl p-6 mb-10 shadow-xl">
-        <div className="absolute inset-0 opacity-20">
-          <div className="absolute right-0 top-0 w-48 h-48 bg-white rounded-full blur-3xl translate-x-1/2 -translate-y-1/2" />
-        </div>
-        <div className="relative z-10 flex flex-col md:flex-row items-center justify-between gap-4">
+      {/* CTA band */}
+      <section style={{
+        position: 'relative', overflow: 'hidden',
+        background: 'linear-gradient(135deg, #059669, #047857)',
+        borderRadius: 24, padding: '24px 28px', marginBottom: 40,
+        boxShadow: '0 8px 32px rgba(5,150,105,0.25)',
+      }} className="mb-10">
+        <div style={{ position: 'absolute', right: 0, top: 0, width: 160, height: 160, background: 'rgba(255,255,255,0.06)', borderRadius: '50%', transform: 'translate(40%, -40%)' }} />
+        <div style={{ position: 'relative', zIndex: 1, display: 'flex', flexDirection: 'column', gap: 16 }} className="md:flex-row md:items-center md:justify-between">
           <div>
-            <div className="inline-flex items-center gap-1.5 bg-white/20 rounded-full px-3 py-1 text-xs font-semibold text-white mb-2">
+            <div style={{ display: 'inline-flex', alignItems: 'center', gap: 6, background: 'rgba(255,255,255,0.18)', borderRadius: 20, padding: '4px 12px', fontSize: 11, fontWeight: 600, color: '#fff', marginBottom: 8 }}>
               🤖 AI-powered
             </div>
-            <h3 className="text-xl font-black text-white">Compare all 7 carriers now</h3>
-            <p className="text-white/80 text-sm mt-1">Enter your parcel size and destination — get quotes in seconds.</p>
+            <h3 style={{ fontSize: '1.2rem', fontWeight: 900, color: '#fff', marginBottom: 4 }}>Compare all 7 carriers now</h3>
+            <p style={{ fontSize: '0.875rem', color: 'rgba(255,255,255,0.80)' }}>Enter your parcel size and destination — get quotes in seconds.</p>
           </div>
-          <Link
-            href="/compare"
-            className="shrink-0 bg-white text-indigo-700 font-bold px-6 py-3 rounded-xl hover:bg-indigo-50 transition-colors shadow-lg whitespace-nowrap"
-          >
+          <Link href="/compare" style={{
+            flexShrink: 0, background: '#fff', color: '#047857', fontWeight: 700,
+            padding: '12px 24px', borderRadius: 12, textDecoration: 'none',
+            boxShadow: '0 4px 16px rgba(0,0,0,0.12)', whiteSpace: 'nowrap', fontSize: 14,
+            display: 'inline-block',
+          }}>
             Start comparing →
           </Link>
         </div>
@@ -204,38 +342,31 @@ export default function Home() {
 
       {/* Reviews */}
       <section className="mb-10">
-        <h2 className="text-lg font-bold text-white mb-5">⭐ What shippers say</h2>
+        <h2 style={{ fontSize: '1.1rem', fontWeight: 800, color: '#064e3b', marginBottom: 20 }}>What shippers say</h2>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-          {REVIEWS.map((r, i) => {
-            const colors = [
-              'border-blue-500/20 from-blue-500/5 to-indigo-500/5',
-              'border-violet-500/20 from-violet-500/5 to-purple-500/5',
-              'border-emerald-500/20 from-emerald-500/5 to-teal-500/5',
-            ]
-            return (
-              <div key={r.name} className={`bg-gradient-to-br ${colors[i % 3]} border rounded-2xl p-5`}>
-                <div className="flex gap-0.5 mb-3">
-                  {Array(5).fill(0).map((_, j) => <Star key={j} size={12} fill="#f59e0b" className="text-amber-400" />)}
-                </div>
-                <p className="text-sm text-blue-100/70 leading-relaxed mb-3">&ldquo;{r.text}&rdquo;</p>
-                <p className="text-xs font-semibold text-white/50">{r.name} · {r.location}</p>
-              </div>
-            )
-          })}
+          {REVIEWS.map((r, i) => (
+            <div key={r.name} style={{
+              background: '#fff', border: '1px solid rgba(5,150,105,0.12)',
+              borderRadius: 16, padding: 20,
+            }}>
+              <p style={{ fontSize: 13, color: 'rgba(6,78,59,0.70)', lineHeight: 1.6, marginBottom: 12 }}>&ldquo;{r.text}&rdquo;</p>
+              <p style={{ fontSize: 11, fontWeight: 600, color: 'rgba(6,78,59,0.45)' }}>{r.name} · {r.location}</p>
+            </div>
+          ))}
         </div>
       </section>
 
       {/* Carrier breakdown */}
       <section className="mb-8">
-        <h2 className="text-lg font-bold text-white mb-5">📦 Carriers we compare</h2>
-        <div className="bg-white/5 border border-blue-500/10 rounded-2xl overflow-hidden">
+        <h2 style={{ fontSize: '1.1rem', fontWeight: 800, color: '#064e3b', marginBottom: 20 }}>📦 Carriers we compare</h2>
+        <div style={{ background: '#fff', border: '1px solid rgba(5,150,105,0.12)', borderRadius: 16, overflow: 'hidden' }}>
           <table className="w-full text-sm">
-            <thead className="bg-gradient-to-r from-blue-700/50 to-violet-700/50 text-blue-200">
-              <tr>
-                <th className="px-4 py-3 text-left">Carrier</th>
-                <th className="px-4 py-3 text-center hidden sm:table-cell">Tracking</th>
-                <th className="px-4 py-3 text-center hidden sm:table-cell">Insurance</th>
-                <th className="px-4 py-3 text-center">Best for</th>
+            <thead style={{ background: 'rgba(5,150,105,0.06)' }}>
+              <tr style={{ color: '#064e3b' }}>
+                <th className="px-4 py-3 text-left" style={{ fontWeight: 700, fontSize: 12 }}>Carrier</th>
+                <th className="px-4 py-3 text-center hidden sm:table-cell" style={{ fontWeight: 700, fontSize: 12 }}>Tracking</th>
+                <th className="px-4 py-3 text-center hidden sm:table-cell" style={{ fontWeight: 700, fontSize: 12 }}>Insurance</th>
+                <th className="px-4 py-3 text-center" style={{ fontWeight: 700, fontSize: 12 }}>Best for</th>
               </tr>
             </thead>
             <tbody>
@@ -246,14 +377,14 @@ export default function Home() {
                 { logo: '🟡', name: 'DHL Express', tracking: '✅', insurance: '✅', best: 'International' },
                 { logo: '🔴', name: 'Parcelforce', tracking: '✅', insurance: '✅', best: 'Heavy items' },
               ].map((c, i) => (
-                <tr key={c.name} className={i % 2 === 0 ? 'bg-transparent' : 'bg-white/5'}>
-                  <td className="px-4 py-2.5 font-semibold text-white flex items-center gap-2">
+                <tr key={c.name} style={{ background: i % 2 === 0 ? 'transparent' : 'rgba(5,150,105,0.02)' }}>
+                  <td className="px-4 py-2.5" style={{ fontWeight: 600, color: '#064e3b', display: 'flex', alignItems: 'center', gap: 8 }}>
                     <span>{c.logo}</span> {c.name}
                   </td>
                   <td className="px-4 py-2.5 text-center text-xs hidden sm:table-cell">{c.tracking}</td>
-                  <td className="px-4 py-2.5 text-center text-xs text-blue-200/60 hidden sm:table-cell">{c.insurance}</td>
+                  <td className="px-4 py-2.5 text-center text-xs hidden sm:table-cell" style={{ color: 'rgba(6,78,59,0.60)' }}>{c.insurance}</td>
                   <td className="px-4 py-2.5 text-center">
-                    <span className="text-xs bg-blue-500/10 text-blue-300 border border-blue-500/20 rounded-full px-2 py-0.5">{c.best}</span>
+                    <span style={{ fontSize: 11, background: 'rgba(5,150,105,0.08)', color: '#059669', border: '1px solid rgba(5,150,105,0.18)', borderRadius: 20, padding: '2px 10px', fontWeight: 600 }}>{c.best}</span>
                   </td>
                 </tr>
               ))}

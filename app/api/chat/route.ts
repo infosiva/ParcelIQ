@@ -21,7 +21,8 @@ export async function POST(req: NextRequest) {
 
     const text = res.choices[0]?.message?.content ?? 'Let me help you find the best shipping option!'
     return NextResponse.json({ text })
-  } catch {
+  } catch (e) {
+    console.error('[parceliq][chat]', e)
     return NextResponse.json({ text: 'Use the comparison tool above to get instant quotes!' }, { status: 200 })
   }
 }

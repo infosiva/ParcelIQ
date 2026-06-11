@@ -25,6 +25,7 @@ export async function POST(req: NextRequest) {
 
     return NextResponse.json({ quotes, summary })
   } catch (e) {
+    console.error('[parceliq][compare]', e)
     return NextResponse.json({ error: String(e) }, { status: 400 })
   }
 }
