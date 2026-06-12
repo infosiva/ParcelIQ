@@ -111,3 +111,4 @@ export function isSectionHidden(theme: SiteTheme | null, sectionId: string): boo
 export function getCopy(theme: SiteTheme | null, key: keyof SiteCopy, fallback: string): string {
   return theme?.copy?.[key] ?? fallback;
 }
+

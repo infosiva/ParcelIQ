@@ -3,6 +3,7 @@ import './globals.css'
 import Navbar from '@/components/Navbar'
 import FloatingChat from '@/components/FloatingChat'
 import Script from 'next/script'
+import { ThemeLoader } from '@/lib/theme-loader-client'
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://parceliq.app'),
@@ -41,6 +42,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         />
       </head>
       <body>
+        <ThemeLoader />
         <div className="bg-mesh" aria-hidden />
         <Navbar />
         <main>{children}</main>
