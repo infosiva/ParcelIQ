@@ -50,12 +50,6 @@ const FEATURES = [
   },
 ]
 
-const REVIEWS = [
-  { text: 'Saved £3.50 on a single package vs what I normally pay. Booked DPD in 30 seconds.', name: 'Sarah M', location: 'Manchester' },
-  { text: 'Finally a comparison site that isn\'t bloated. Entered my parcel dims, got 7 quotes instantly.', name: 'James T', location: 'London' },
-  { text: 'Used it for an international parcel. The DHL vs Royal Mail breakdown was really clear.', name: 'Priya K', location: 'Birmingham' },
-]
-
 const STATS = [
   { value: '7', label: 'Carriers compared live' },
   { value: 'Free', label: 'Always — no signup needed' },
@@ -337,22 +331,6 @@ export default function Home() {
           }}>
             Start comparing →
           </Link>
-        </div>
-      </section>
-
-      {/* Reviews */}
-      <section className="mb-10">
-        <h2 style={{ fontSize: '1.1rem', fontWeight: 800, color: '#064e3b', marginBottom: 20 }}>What shippers say</h2>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-          {REVIEWS.map((r, i) => (
-            <div key={r.name} style={{
-              background: '#fff', border: '1px solid rgba(5,150,105,0.12)',
-              borderRadius: 16, padding: 20,
-            }}>
-              <p style={{ fontSize: 13, color: 'rgba(6,78,59,0.70)', lineHeight: 1.6, marginBottom: 12 }}>&ldquo;{r.text}&rdquo;</p>
-              <p style={{ fontSize: 11, fontWeight: 600, color: 'rgba(6,78,59,0.45)' }}>{r.name} · {r.location}</p>
-            </div>
-          ))}
         </div>
       </section>
 
