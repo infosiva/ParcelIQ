@@ -17,6 +17,9 @@ export const metadata: Metadata = {
     type: 'website',
     images: [{ url: '/og.png', width: 1200, height: 630, alt: 'ParcelIQ — UK parcel price comparison' }],
   },
+  other: {
+    'google-adsense-account': 'ca-pub-XXXXXXXXXXXXXXXX',
+  },
 }
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
