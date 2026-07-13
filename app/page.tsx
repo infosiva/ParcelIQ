@@ -20,33 +20,33 @@ const FEATURES = [
     icon: <TrendingDown size={22} />,
     title: 'Real prices, no fluff',
     body: 'Live rate cards from 7 carriers. The actual price you\'ll pay, not a teaser.',
-    bg: 'rgba(5,150,105,0.06)',
-    border: 'rgba(5,150,105,0.15)',
-    iconColor: '#059669',
+    bg: 'rgba(202,138,4,0.06)',
+    border: 'rgba(202,138,4,0.15)',
+    iconColor: '#ca8a04',
   },
   {
     icon: <Zap size={22} />,
     title: 'AI picks the winner',
     body: 'Cheapest, fastest, or best all-rounder — AI explains the recommendation.',
-    bg: 'rgba(4,120,87,0.06)',
-    border: 'rgba(4,120,87,0.15)',
-    iconColor: '#047857',
+    bg: 'rgba(161,98,7,0.06)',
+    border: 'rgba(161,98,7,0.15)',
+    iconColor: '#a16207',
   },
   {
     icon: <Globe size={22} />,
     title: 'UK & international',
     body: 'Domestic and worldwide quotes in one view. Customs info included.',
-    bg: 'rgba(16,185,129,0.06)',
-    border: 'rgba(16,185,129,0.15)',
-    iconColor: '#10b981',
+    bg: 'rgba(234,179,8,0.06)',
+    border: 'rgba(234,179,8,0.15)',
+    iconColor: '#eab308',
   },
   {
     icon: <ShieldCheck size={22} />,
     title: 'Tracking & cover',
     body: 'We flag which carriers include tracking, insurance, and signature.',
-    bg: 'rgba(5,150,105,0.04)',
-    border: 'rgba(5,150,105,0.12)',
-    iconColor: '#059669',
+    bg: 'rgba(202,138,4,0.04)',
+    border: 'rgba(202,138,4,0.12)',
+    iconColor: '#ca8a04',
   },
 ]
 
@@ -95,20 +95,20 @@ function TrackingDemo() {
   return (
     <div style={{
       background: '#ffffff',
-      border: '1px solid rgba(5,150,105,0.15)',
+      border: '1px solid rgba(202,138,4,0.15)',
       borderRadius: 20,
       padding: 24,
-      boxShadow: '0 4px 32px rgba(5,150,105,0.08)',
+      boxShadow: '0 4px 32px rgba(202,138,4,0.08)',
     }}>
       {/* Header */}
       <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 20 }}>
         <div>
-          <div style={{ fontSize: 11, fontWeight: 600, color: '#059669', letterSpacing: '0.08em', textTransform: 'uppercase', marginBottom: 2 }}>Live tracking</div>
-          <div style={{ fontSize: 14, fontWeight: 700, color: '#064e3b' }}>Parcel #PQ-84921</div>
+          <div style={{ fontSize: 11, fontWeight: 600, color: '#ca8a04', letterSpacing: '0.08em', textTransform: 'uppercase', marginBottom: 2 }}>Live tracking</div>
+          <div style={{ fontSize: 14, fontWeight: 700, color: '#422006' }}>Parcel #PQ-84921</div>
         </div>
-        <div style={{ display: 'flex', alignItems: 'center', gap: 6, background: 'rgba(5,150,105,0.08)', borderRadius: 20, padding: '4px 10px' }}>
-          <span style={{ width: 7, height: 7, borderRadius: '50%', background: '#059669', display: 'inline-block', animation: 'trackingPulse 1.4s ease infinite' }} />
-          <span style={{ fontSize: 11, fontWeight: 600, color: '#059669' }}>In transit</span>
+        <div style={{ display: 'flex', alignItems: 'center', gap: 6, background: 'rgba(202,138,4,0.08)', borderRadius: 20, padding: '4px 10px' }}>
+          <span style={{ width: 7, height: 7, borderRadius: '50%', background: '#ca8a04', display: 'inline-block', animation: 'trackingPulse 1.4s ease infinite' }} />
+          <span style={{ fontSize: 11, fontWeight: 600, color: '#ca8a04' }}>In transit</span>
         </div>
       </div>
 
@@ -120,7 +120,7 @@ function TrackingDemo() {
             {i < TRACKING_STEPS.length - 1 && (
               <div style={{
                 position: 'absolute', left: 13, top: 24, width: 2, height: 28,
-                background: i < activeStep ? '#059669' : 'rgba(5,150,105,0.15)',
+                background: i < activeStep ? '#ca8a04' : 'rgba(202,138,4,0.15)',
                 transition: 'background 0.4s ease',
               }} />
             )}
@@ -130,10 +130,10 @@ function TrackingDemo() {
               transition={{ duration: 0.4 }}
               style={{
                 width: 28, height: 28, borderRadius: '50%', flexShrink: 0,
-                background: i <= activeStep ? '#059669' : '#f0fdf4',
-                border: `2px solid ${i <= activeStep ? '#059669' : 'rgba(5,150,105,0.20)'}`,
+                background: i <= activeStep ? '#ca8a04' : '#fefce8',
+                border: `2px solid ${i <= activeStep ? '#ca8a04' : 'rgba(202,138,4,0.20)'}`,
                 display: 'flex', alignItems: 'center', justifyContent: 'center',
-                color: i <= activeStep ? '#fff' : 'rgba(5,150,105,0.4)',
+                color: i <= activeStep ? '#fff' : 'rgba(202,138,4,0.4)',
                 transition: 'all 0.4s ease',
                 marginBottom: 20,
               }}
@@ -142,7 +142,7 @@ function TrackingDemo() {
             </motion.div>
             {/* text */}
             <div style={{ paddingTop: 4, paddingBottom: 20 }}>
-              <div style={{ fontSize: 13, fontWeight: i <= activeStep ? 600 : 400, color: i <= activeStep ? '#064e3b' : '#6b7280', transition: 'all 0.3s' }}>{step.label}</div>
+              <div style={{ fontSize: 13, fontWeight: i <= activeStep ? 600 : 400, color: i <= activeStep ? '#422006' : '#6b7280', transition: 'all 0.3s' }}>{step.label}</div>
               <div style={{ fontSize: 11, color: 'rgba(6,78,59,0.4)', marginTop: 1 }}>{step.time}</div>
             </div>
           </div>
@@ -158,23 +158,23 @@ function TrackingDemo() {
             exit={{ opacity: 0, y: 8 }}
             transition={{ duration: 0.3, ease: [0.23, 1, 0.32, 1] }}
           >
-            <div style={{ fontSize: 11, fontWeight: 600, color: '#059669', letterSpacing: '0.08em', textTransform: 'uppercase', marginBottom: 10 }}>
+            <div style={{ fontSize: 11, fontWeight: 600, color: '#ca8a04', letterSpacing: '0.08em', textTransform: 'uppercase', marginBottom: 10 }}>
               AI quotes for next shipment
             </div>
             {QUOTE_ROWS.map((q, i) => (
               <div key={i} style={{
                 display: 'flex', alignItems: 'center', justifyContent: 'space-between',
                 padding: '8px 12px', borderRadius: 10, marginBottom: 6,
-                background: i === 0 ? 'rgba(5,150,105,0.06)' : '#f8fffe',
-                border: `1px solid ${i === 0 ? 'rgba(5,150,105,0.20)' : 'rgba(5,150,105,0.08)'}`,
+                background: i === 0 ? 'rgba(202,138,4,0.06)' : '#fffdf0',
+                border: `1px solid ${i === 0 ? 'rgba(202,138,4,0.20)' : 'rgba(202,138,4,0.08)'}`,
               }}>
                 <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
                   <span style={{ fontSize: 16 }}>{q.logo}</span>
-                  <span style={{ fontSize: 12, fontWeight: 600, color: '#064e3b' }}>{q.name}</span>
+                  <span style={{ fontSize: 12, fontWeight: 600, color: '#422006' }}>{q.name}</span>
                 </div>
                 <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
                   <span style={{ fontSize: 11, fontWeight: 600, color: q.tagColor, background: q.tagBg, borderRadius: 20, padding: '2px 8px' }}>{q.tag}</span>
-                  <span style={{ fontSize: 13, fontWeight: 800, color: '#064e3b' }}>{q.price}</span>
+                  <span style={{ fontSize: 13, fontWeight: 800, color: '#422006' }}>{q.price}</span>
                 </div>
               </div>
             ))}
@@ -191,7 +191,7 @@ export default function Home() {
 
       {/* Hero — split layout */}
       <section className="relative mb-10 rounded-3xl overflow-hidden p-6 md:p-10"
-        style={{ background: 'linear-gradient(135deg, #f0fdf4 0%, #ecfdf5 100%)', border: '1px solid rgba(5,150,105,0.12)', boxShadow: '0 4px 40px rgba(5,150,105,0.06)' }}>
+        style={{ background: 'linear-gradient(135deg, #fefce8 0%, #fef9c3 100%)', border: '1px solid rgba(202,138,4,0.12)', boxShadow: '0 4px 40px rgba(202,138,4,0.06)' }}>
 
         <div className="relative z-10 grid lg:grid-cols-2 gap-10 items-start">
           {/* Left — headline + CTA */}
@@ -200,14 +200,14 @@ export default function Home() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, ease: [0.23, 1, 0.32, 1] }}
           >
-            <div style={{ display: 'inline-flex', alignItems: 'center', gap: 8, background: 'rgba(5,150,105,0.10)', border: '1px solid rgba(5,150,105,0.20)', borderRadius: 999, padding: '6px 14px', marginBottom: 16 }}>
-              <span style={{ width: 7, height: 7, borderRadius: '50%', background: '#059669', display: 'inline-block', animation: 'trackingPulse 1.4s ease infinite' }} />
-              <span style={{ fontSize: 12, fontWeight: 600, color: '#059669' }}>Live · 7 UK carriers compared</span>
+            <div style={{ display: 'inline-flex', alignItems: 'center', gap: 8, background: 'rgba(202,138,4,0.10)', border: '1px solid rgba(202,138,4,0.20)', borderRadius: 999, padding: '6px 14px', marginBottom: 16 }}>
+              <span style={{ width: 7, height: 7, borderRadius: '50%', background: '#ca8a04', display: 'inline-block', animation: 'trackingPulse 1.4s ease infinite' }} />
+              <span style={{ fontSize: 12, fontWeight: 600, color: '#ca8a04' }}>Live · 7 UK carriers compared</span>
             </div>
 
-            <h1 style={{ fontSize: 'clamp(2rem,5vw,3.2rem)', fontWeight: 900, letterSpacing: '-0.03em', lineHeight: 1.12, color: '#064e3b', marginBottom: 14 }}>
+            <h1 style={{ fontSize: 'clamp(2rem,5vw,3.2rem)', fontWeight: 900, letterSpacing: '-0.03em', lineHeight: 1.12, color: '#422006', marginBottom: 14 }}>
               Find the cheapest UK shipping
-              <span style={{ display: 'block', background: 'linear-gradient(90deg,#059669,#047857)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>
+              <span style={{ display: 'block', background: 'linear-gradient(90deg,#ca8a04,#a16207)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>
                 in 10 seconds.
               </span>
             </h1>
@@ -224,8 +224,8 @@ export default function Home() {
               {CARRIERS.map(c => (
                 <div key={c.name} style={{
                   display: 'flex', alignItems: 'center', gap: 6,
-                  background: '#fff', border: '1px solid rgba(5,150,105,0.15)',
-                  borderRadius: 8, padding: '6px 12px', fontSize: 12, fontWeight: 600, color: '#064e3b',
+                  background: '#fff', border: '1px solid rgba(202,138,4,0.15)',
+                  borderRadius: 8, padding: '6px 12px', fontSize: 12, fontWeight: 600, color: '#422006',
                 }}>
                   <span>{c.logo}</span> {c.name}
                 </div>
@@ -236,7 +236,7 @@ export default function Home() {
             <div style={{ display: 'flex', flexWrap: 'wrap', gap: 20, marginBottom: 24 }}>
               {STATS.map(s => (
                 <div key={s.label}>
-                  <div style={{ fontSize: '1.4rem', fontWeight: 900, color: '#059669', letterSpacing: '-0.02em' }}>{s.value}</div>
+                  <div style={{ fontSize: '1.4rem', fontWeight: 900, color: '#ca8a04', letterSpacing: '-0.02em' }}>{s.value}</div>
                   <div style={{ fontSize: '0.75rem', color: 'rgba(6,78,59,0.55)', marginTop: 1 }}>{s.label}</div>
                 </div>
               ))}
@@ -271,11 +271,11 @@ export default function Home() {
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.2, ease: [0.23, 1, 0.32, 1] }}
-          style={{ marginTop: 28, padding: 24, background: '#fff', borderRadius: 16, border: '1px solid rgba(5,150,105,0.15)' }}
+          style={{ marginTop: 28, padding: 24, background: '#fff', borderRadius: 16, border: '1px solid rgba(202,138,4,0.15)' }}
         >
           <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 16 }}>
-            <Package2 size={18} style={{ color: '#059669' }} />
-            <span style={{ fontWeight: 700, fontSize: 14, color: '#064e3b' }}>Get instant quotes</span>
+            <Package2 size={18} style={{ color: '#ca8a04' }} />
+            <span style={{ fontWeight: 700, fontSize: 14, color: '#422006' }}>Get instant quotes</span>
           </div>
           <CompareForm />
         </motion.div>
@@ -284,8 +284,8 @@ export default function Home() {
       {/* Features */}
       <section className="mb-10">
         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 20 }}>
-          <h2 style={{ fontSize: '1.1rem', fontWeight: 800, color: '#064e3b' }}>⚡ Why ParcelIQ?</h2>
-          <Link href="/compare" style={{ fontSize: 12, color: '#059669', display: 'flex', alignItems: 'center', gap: 4, textDecoration: 'none', fontWeight: 600 }}>
+          <h2 style={{ fontSize: '1.1rem', fontWeight: 800, color: '#422006' }}>⚡ Why ParcelIQ?</h2>
+          <Link href="/compare" style={{ fontSize: 12, color: '#ca8a04', display: 'flex', alignItems: 'center', gap: 4, textDecoration: 'none', fontWeight: 600 }}>
             Compare now <ArrowRight size={12} />
           </Link>
         </div>
@@ -296,11 +296,11 @@ export default function Home() {
               borderRadius: 16, padding: 18,
               transition: 'transform 0.15s, box-shadow 0.15s',
             }}
-              onMouseEnter={e => { (e.currentTarget as HTMLDivElement).style.transform = 'scale(1.02)'; (e.currentTarget as HTMLDivElement).style.boxShadow = '0 4px 16px rgba(5,150,105,0.10)' }}
+              onMouseEnter={e => { (e.currentTarget as HTMLDivElement).style.transform = 'scale(1.02)'; (e.currentTarget as HTMLDivElement).style.boxShadow = '0 4px 16px rgba(202,138,4,0.10)' }}
               onMouseLeave={e => { (e.currentTarget as HTMLDivElement).style.transform = 'scale(1)'; (e.currentTarget as HTMLDivElement).style.boxShadow = 'none' }}
             >
               <div style={{ color: f.iconColor, marginBottom: 12 }}>{f.icon}</div>
-              <h3 style={{ fontWeight: 700, fontSize: 13, color: '#064e3b', marginBottom: 6 }}>{f.title}</h3>
+              <h3 style={{ fontWeight: 700, fontSize: 13, color: '#422006', marginBottom: 6 }}>{f.title}</h3>
               <p style={{ fontSize: 12, color: 'rgba(6,78,59,0.60)', lineHeight: 1.55 }}>{f.body}</p>
             </div>
           ))}
@@ -310,9 +310,9 @@ export default function Home() {
       {/* CTA band */}
       <section style={{
         position: 'relative', overflow: 'hidden',
-        background: 'linear-gradient(135deg, #059669, #047857)',
+        background: 'linear-gradient(135deg, #ca8a04, #a16207)',
         borderRadius: 24, padding: '24px 28px', marginBottom: 40,
-        boxShadow: '0 8px 32px rgba(5,150,105,0.25)',
+        boxShadow: '0 8px 32px rgba(202,138,4,0.25)',
       }} className="mb-10">
         <div style={{ position: 'absolute', right: 0, top: 0, width: 160, height: 160, background: 'rgba(255,255,255,0.06)', borderRadius: '50%', transform: 'translate(40%, -40%)' }} />
         <div style={{ position: 'relative', zIndex: 1, display: 'flex', flexDirection: 'column', gap: 16 }} className="md:flex-row md:items-center md:justify-between">
@@ -324,7 +324,7 @@ export default function Home() {
             <p style={{ fontSize: '0.875rem', color: 'rgba(255,255,255,0.80)' }}>Enter your parcel size and destination — get quotes in seconds.</p>
           </div>
           <Link href="/compare" style={{
-            flexShrink: 0, background: '#fff', color: '#047857', fontWeight: 700,
+            flexShrink: 0, background: '#fff', color: '#a16207', fontWeight: 700,
             padding: '12px 24px', borderRadius: 12, textDecoration: 'none',
             boxShadow: '0 4px 16px rgba(0,0,0,0.12)', whiteSpace: 'nowrap', fontSize: 14,
             display: 'inline-block',
@@ -336,11 +336,11 @@ export default function Home() {
 
       {/* Carrier breakdown */}
       <section className="mb-8">
-        <h2 style={{ fontSize: '1.1rem', fontWeight: 800, color: '#064e3b', marginBottom: 20 }}>📦 Carriers we compare</h2>
-        <div style={{ background: '#fff', border: '1px solid rgba(5,150,105,0.12)', borderRadius: 16, overflow: 'hidden' }}>
+        <h2 style={{ fontSize: '1.1rem', fontWeight: 800, color: '#422006', marginBottom: 20 }}>📦 Carriers we compare</h2>
+        <div style={{ background: '#fff', border: '1px solid rgba(202,138,4,0.12)', borderRadius: 16, overflow: 'hidden' }}>
           <table className="w-full text-sm">
-            <thead style={{ background: 'rgba(5,150,105,0.06)' }}>
-              <tr style={{ color: '#064e3b' }}>
+            <thead style={{ background: 'rgba(202,138,4,0.06)' }}>
+              <tr style={{ color: '#422006' }}>
                 <th className="px-4 py-3 text-left" style={{ fontWeight: 700, fontSize: 12 }}>Carrier</th>
                 <th className="px-4 py-3 text-center hidden sm:table-cell" style={{ fontWeight: 700, fontSize: 12 }}>Tracking</th>
                 <th className="px-4 py-3 text-center hidden sm:table-cell" style={{ fontWeight: 700, fontSize: 12 }}>Insurance</th>
@@ -355,14 +355,14 @@ export default function Home() {
                 { logo: '🟡', name: 'DHL Express', tracking: '✅', insurance: '✅', best: 'International' },
                 { logo: '🔴', name: 'Parcelforce', tracking: '✅', insurance: '✅', best: 'Heavy items' },
               ].map((c, i) => (
-                <tr key={c.name} style={{ background: i % 2 === 0 ? 'transparent' : 'rgba(5,150,105,0.02)' }}>
-                  <td className="px-4 py-2.5" style={{ fontWeight: 600, color: '#064e3b', display: 'flex', alignItems: 'center', gap: 8 }}>
+                <tr key={c.name} style={{ background: i % 2 === 0 ? 'transparent' : 'rgba(202,138,4,0.02)' }}>
+                  <td className="px-4 py-2.5" style={{ fontWeight: 600, color: '#422006', display: 'flex', alignItems: 'center', gap: 8 }}>
                     <span>{c.logo}</span> {c.name}
                   </td>
                   <td className="px-4 py-2.5 text-center text-xs hidden sm:table-cell">{c.tracking}</td>
                   <td className="px-4 py-2.5 text-center text-xs hidden sm:table-cell" style={{ color: 'rgba(6,78,59,0.60)' }}>{c.insurance}</td>
                   <td className="px-4 py-2.5 text-center">
-                    <span style={{ fontSize: 11, background: 'rgba(5,150,105,0.08)', color: '#059669', border: '1px solid rgba(5,150,105,0.18)', borderRadius: 20, padding: '2px 10px', fontWeight: 600 }}>{c.best}</span>
+                    <span style={{ fontSize: 11, background: 'rgba(202,138,4,0.08)', color: '#ca8a04', border: '1px solid rgba(202,138,4,0.18)', borderRadius: 20, padding: '2px 10px', fontWeight: 600 }}>{c.best}</span>
                   </td>
                 </tr>
               ))}

@@ -1,18 +1,18 @@
 @import "tailwindcss";
 
 :root {
-  --bg:        #f0fdf4;
+  --bg:        #fefce8;
   --surface:   #ffffff;
-  --surface-2: #f8fffe;
-  --surface-3: #ecfdf5;
-  --border:    rgba(5,150,105,0.15);
-  --border-2:  rgba(5,150,105,0.08);
-  --text:      #064e3b;
-  --text-2:    rgba(6,78,59,0.75);
-  --text-3:    rgba(6,78,59,0.50);
-  --accent:    #059669;
-  --accent-2:  #047857;
-  --accent-dim: rgba(5,150,105,0.10);
+  --surface-2: #fffdf0;
+  --surface-3: #fef9c3;
+  --border:    rgba(202,138,4,0.15);
+  --border-2:  rgba(202,138,4,0.08);
+  --text:      #422006;
+  --text-2:    rgba(66,32,6,0.75);
+  --text-3:    rgba(66,32,6,0.50);
+  --accent:    #ca8a04;
+  --accent-2:  #a16207;
+  --accent-dim: rgba(202,138,4,0.10);
   --green:     #059669;
   --green-dim: rgba(5,150,105,0.10);
   --amber:     #d97706;
@@ -40,8 +40,8 @@ body {
 .bg-mesh {
   position: fixed; inset: 0; z-index: -1; pointer-events: none;
   background:
-    radial-gradient(ellipse 60% 50% at 20% 20%, rgba(5,150,105,0.05) 0%, transparent 60%),
-    radial-gradient(ellipse 50% 60% at 80% 80%, rgba(4,120,87,0.04) 0%, transparent 60%),
+    radial-gradient(ellipse 60% 50% at 20% 20%, rgba(202,138,4,0.05) 0%, transparent 60%),
+    radial-gradient(ellipse 50% 60% at 80% 80%, rgba(161,98,7,0.04) 0%, transparent 60%),
     var(--bg);
 }
 
@@ -83,7 +83,7 @@ body {
 
 select.input-field {
   appearance: none;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%23059669' stroke-width='2'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%23ca8a04' stroke-width='2'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
   background-repeat: no-repeat;
   background-position: right 0.75rem center;
   padding-right: 2.25rem;
@@ -108,19 +108,19 @@ select.input-field {
   display: inline-flex; align-items: center; gap: 0.5rem;
   background: var(--accent-dim);
   color: var(--accent);
-  border: 1px solid rgba(5,150,105,0.20);
+  border: 1px solid rgba(202,138,4,0.20);
   border-radius: 10px;
   padding: 0.6rem 1.1rem;
   font-size: 0.875rem; font-weight: 500;
   cursor: pointer;
   transition: background 0.15s;
 }
-.btn-ghost:hover { background: rgba(5,150,105,0.16); }
+.btn-ghost:hover { background: rgba(202,138,4,0.16); }
 
 /* ── Carrier badge colours ───────────────────────────── */
 .badge-fast  { background: var(--green-dim);  color: var(--green);  border: 1px solid rgba(5,150,105,0.2); }
 .badge-cheap { background: var(--amber-dim);  color: var(--amber);  border: 1px solid rgba(217,119,6,0.2); }
-.badge-track { background: var(--accent-dim); color: var(--accent); border: 1px solid rgba(5,150,105,0.2); }
+.badge-track { background: var(--accent-dim); color: var(--accent); border: 1px solid rgba(202,138,4,0.2); }
 .badge-eco   { background: rgba(5,150,105,0.06); color: #059669; border: 1px solid rgba(5,150,105,0.2); }
 
 .badge {
@@ -131,7 +131,7 @@ select.input-field {
 
 /* ── Price highlight ──────────────────────────────────── */
 .price-best {
-  background: linear-gradient(135deg, #059669, #047857);
+  background: linear-gradient(135deg, #ca8a04, #a16207);
   -webkit-background-clip: text; -webkit-text-fill-color: transparent;
 }
 
@@ -141,8 +141,8 @@ select.input-field {
 
 /* ── AI recommendation card ───────────────────────────── */
 .ai-card {
-  background: linear-gradient(135deg, rgba(5,150,105,0.06), rgba(4,120,87,0.04));
-  border: 1px solid rgba(5,150,105,0.18);
+  background: linear-gradient(135deg, rgba(202,138,4,0.06), rgba(161,98,7,0.04));
+  border: 1px solid rgba(202,138,4,0.18);
   border-radius: 16px;
 }
 
