@@ -51,7 +51,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <Navbar />
         <main>{children}</main>
         <FloatingChat />
-        <FeedbackWidget siteName="ParcelIQ" />
+        <FeedbackWidget siteName="ParcelIQ" position="left" />
         <footer style={{ textAlign: 'center', padding: '2rem 1rem', fontSize: '0.8125rem', color: 'rgba(6,78,59,0.40)', borderTop: '1px solid rgba(202,138,4,0.10)' }}>
           <p>© 2025 ParcelIQ · Prices are indicative — confirm at carrier website before shipping · <a href="/learn" style={{ color: 'rgba(202,138,4,0.70)', textDecoration: 'none' }}>Shipping Guide</a> · <a href="/privacy" style={{ color: 'rgba(202,138,4,0.70)', textDecoration: 'none' }}>Privacy</a></p>
         </footer>
