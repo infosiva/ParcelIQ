@@ -1,3 +1,5 @@
+import { unstable_cache } from 'next/cache'
+
 // Edge Config is optional — install @vercel/edge-config to enable remote theme overrides
 let _edgeGet: ((key: string) => Promise<unknown>) | null = null
 try {
@@ -53,7 +55,11 @@ export interface SiteTheme {
  */
 export async function loadSiteTheme(siteId: string): Promise<SiteTheme | null> {
   try {
-    const theme = (await get(`theme_${siteId}`)) as SiteTheme | undefined;
+    const theme = (await unstable_cache(
+      () => get(`theme_${siteId}`),
+      ['site-theme', siteId],
+      { revalidate: 600 },
+    )()) as SiteTheme | undefined;
     return theme ?? null;
   } catch {
     return null;
