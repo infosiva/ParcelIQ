@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { getQuotes, aiRecommendationText, ShipmentParams } from '@/lib/carriers'
+import { AI_LIMITER } from '@/lib/rateLimit'
 
 export const runtime = 'nodejs'
 
@@ -7,6 +8,8 @@ export const runtime = 'nodejs'
 // Falls back to static aiRecommendationText if no AI keys configured
 
 export async function POST(req: NextRequest) {
+  const limited = AI_LIMITER.check(req); if (limited) return limited
+
   try {
     const body = await req.json() as Partial<ShipmentParams>
 
