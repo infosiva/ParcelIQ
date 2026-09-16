@@ -18,7 +18,7 @@ export const metadata: Metadata = {
     images: [{ url: '/og.png', width: 1200, height: 630, alt: 'ParcelIQ — UK parcel price comparison' }],
   },
   other: {
-    'google-adsense-account': 'ca-pub-XXXXXXXXXXXXXXXX',
+    'google-adsense-account': 'ca-pub-4237294630161176',
   },
 }
 
@@ -26,6 +26,12 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en">
       <head>
+        <Script
+          async
+          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4237294630161176"
+          crossOrigin="anonymous"
+          strategy="afterInteractive"
+        />
         <Script
           id="structured-data"
           type="application/ld+json"
