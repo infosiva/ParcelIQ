@@ -16,7 +16,7 @@ export async function POST(req: NextRequest) {
     const sysPrompt = system ?? 'You are ParcelIQ AI — a UK shipping expert. Help users compare Royal Mail, DPD, Evri, DHL, Parcelforce. Give practical advice on cheapest/fastest options, packaging, customs, tracking. Be concise and actionable.'
 
     const res = await groq().chat.completions.create({
-      model: 'llama-3.3-70b-versatile',
+      model: 'qwen/qwen3.8-27b',
       messages: [{ role: 'system', content: sysPrompt }, ...messages],
       max_tokens: 400,
       temperature: 0.6,
