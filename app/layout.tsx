@@ -7,6 +7,7 @@ import Script from 'next/script'
 import { ThemeLoader } from '@/lib/theme-loader-client'
 import { getSiteFlags } from '@/lib/flags'
 
+import { MotionProvider } from "@infosiva/shared-ui/modern";
 export const metadata: Metadata = {
   metadataBase: new URL('https://parceliq.app'),
   title: 'ParcelIQ — UK Parcel Price Comparison | Find Cheapest Shipping',
@@ -57,7 +58,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
         <ThemeLoader />
         <div className="bg-mesh" aria-hidden />
         <Navbar />
-        <main>{children}</main>
+        <main><MotionProvider>{children}</MotionProvider></main>
         {flags.chatbot && <FloatingChat />}
         <FeedbackWidget siteName="ParcelIQ" position="left" />
         <footer style={{ textAlign: 'center', padding: '2rem 1rem', fontSize: '0.8125rem', color: 'rgba(6,78,59,0.40)', borderTop: '1px solid rgba(202,138,4,0.10)' }}>

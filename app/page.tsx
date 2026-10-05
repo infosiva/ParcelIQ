@@ -1,5 +1,6 @@
 'use client'
 import CompareForm from '@/components/CompareForm'
+import { MagneticButton } from "@infosiva/shared-ui/modern";
 import { Package2, ShieldCheck, Zap, TrendingDown, Globe, ArrowRight, CheckCircle2, Clock, MapPin } from 'lucide-react'
 import Link from 'next/link'
 import { motion, AnimatePresence } from 'framer-motion'
@@ -323,13 +324,15 @@ export default function Home() {
             <h3 style={{ fontSize: '1.2rem', fontWeight: 900, color: '#fff', marginBottom: 4 }}>Compare all 7 carriers now</h3>
             <p style={{ fontSize: '0.875rem', color: 'rgba(255,255,255,0.80)' }}>Enter your parcel size and destination — get quotes in seconds.</p>
           </div>
-          <Link href="/compare" style={{
-            flexShrink: 0, background: '#fff', color: '#a16207', fontWeight: 700,
-            padding: '12px 24px', borderRadius: 12, textDecoration: 'none',
-            boxShadow: '0 4px 16px rgba(0,0,0,0.12)', whiteSpace: 'nowrap', fontSize: 14,
-            display: 'inline-block',
-          }}>
-            Start comparing →
+          <Link href="/compare" style={{ flexShrink: 0, textDecoration: 'none' }}>
+            <MagneticButton style={{
+              background: '#fff', color: '#a16207', fontWeight: 700, border: 'none', cursor: 'pointer',
+              padding: '12px 24px', borderRadius: 12,
+              boxShadow: '0 4px 16px rgba(0,0,0,0.12)', whiteSpace: 'nowrap', fontSize: 14,
+              display: 'inline-block',
+            }}>
+              Start comparing →
+            </MagneticButton>
           </Link>
         </div>
       </section>
