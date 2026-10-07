@@ -2,6 +2,7 @@
 import { useState } from 'react'
 import Link from 'next/link'
 import { Package2, Menu, X } from 'lucide-react'
+import Logo from '@/components/Logo'
 
 export default function Navbar() {
   const [open, setOpen] = useState(false)
@@ -10,17 +11,12 @@ export default function Navbar() {
     <>
       <nav style={{
         position: 'fixed', top: 0, left: 0, right: 0, zIndex: 50,
-        background: 'rgba(254,252,232,0.85)', backdropFilter: 'blur(16px)',
-        borderBottom: '1px solid rgba(202,138,4,0.12)',
-        boxShadow: '0 1px 0 rgba(202,138,4,0.06)',
+        background: 'rgba(251,246,238,0.85)', backdropFilter: 'blur(16px)',
+        borderBottom: '1px solid rgba(194,55,26,0.12)',
+        boxShadow: '0 1px 0 rgba(194,55,26,0.06)',
       }}>
         <div style={{ maxWidth: 1100, margin: '0 auto', padding: '0 1.25rem', height: 56, display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-          <Link href="/" style={{ display: 'flex', alignItems: 'center', gap: 8, textDecoration: 'none' }}>
-            <Package2 size={20} style={{ color: 'var(--accent)' }} />
-            <span style={{ fontWeight: 800, fontSize: '1rem', color: 'var(--text)', letterSpacing: '-0.02em' }}>
-              Parcel<span style={{ color: 'var(--accent)' }}>IQ</span>
-            </span>
-          </Link>
+          <Link href="/" aria-label="ParcelIQ home" style={{ textDecoration: 'none' }}><Logo /></Link>
 
           {/* Desktop */}
           <div className="hidden md:flex" style={{ gap: 4 }}>
@@ -28,7 +24,6 @@ export default function Navbar() {
               { href: '/',         label: 'Compare' },
               { href: '/learn',    label: 'Shipping Guide' },
               { href: '/track',    label: 'Track' },
-              { href: '/affiliate', label: 'Partner' },
             ].map(l => (
               <Link key={l.href} href={l.href} style={{
                 padding: '0.4rem 0.85rem', borderRadius: 8, fontSize: '0.85rem',
@@ -45,7 +40,7 @@ export default function Navbar() {
             Compare Now
           </Link>
 
-          <button onClick={() => setOpen(v => !v)} className="md:hidden" style={{ background: 'none', border: 'none', cursor: 'pointer', color: 'var(--text-2)' }}>
+          <button onClick={() => setOpen(v => !v)} className="md:hidden" aria-label="Menu" style={{ background: 'none', border: 'none', cursor: 'pointer', color: 'var(--text-2)', minWidth: 44, minHeight: 44 }}>
             {open ? <X size={20} /> : <Menu size={20} />}
           </button>
         </div>

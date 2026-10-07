@@ -24,9 +24,9 @@ export default function QuoteCard({ quote, rank }: Props) {
       className={`card-sm fade-up`}
       style={{
         animationDelay: `${rank * 0.06}s`,
-        border: isRec ? '1px solid rgba(202,138,4,0.5)' : undefined,
-        background: isRec ? 'linear-gradient(135deg, rgba(202,138,4,0.08), var(--surface-2))' : undefined,
-        boxShadow: isRec ? '0 0 0 3px rgba(202,138,4,0.12), 0 4px 24px rgba(202,138,4,0.10)' : undefined,
+        border: isRec ? '1px solid rgba(194,55,26,0.5)' : undefined,
+        background: isRec ? 'linear-gradient(135deg, rgba(194,55,26,0.08), var(--surface-2))' : undefined,
+        boxShadow: isRec ? '0 0 0 3px rgba(194,55,26,0.12), 0 4px 24px rgba(194,55,26,0.10)' : undefined,
         padding: '1.1rem 1.25rem',
         position: 'relative',
       }}
@@ -36,12 +36,12 @@ export default function QuoteCard({ quote, rank }: Props) {
         <>
           <div style={{
             position: 'absolute', top: -14, left: '50%', transform: 'translateX(-50%)',
-            background: 'linear-gradient(90deg, #ca8a04, #eab308)',
+            background: 'linear-gradient(90deg, #c2371a, #eab308)',
             color: '#fff',
             padding: '3px 14px', borderRadius: 999, fontSize: '0.65rem', fontWeight: 700,
             letterSpacing: '0.06em', whiteSpace: 'nowrap',
             display: 'flex', alignItems: 'center', gap: 5,
-            boxShadow: '0 2px 8px rgba(202,138,4,0.35)',
+            boxShadow: '0 2px 8px rgba(194,55,26,0.35)',
           }}>
             <Trophy size={9} fill="currentColor" /> AI Pick · Best for this parcel
           </div>
@@ -50,8 +50,8 @@ export default function QuoteCard({ quote, rank }: Props) {
             marginBottom: '0.75rem',
             marginTop: '0.5rem',
             padding: '0.4rem 0.75rem',
-            background: 'rgba(202,138,4,0.08)',
-            border: '1px solid rgba(202,138,4,0.2)',
+            background: 'rgba(194,55,26,0.08)',
+            border: '1px solid rgba(194,55,26,0.2)',
             borderRadius: 8,
             fontSize: '0.72rem',
             color: '#fde047',
@@ -59,7 +59,7 @@ export default function QuoteCard({ quote, rank }: Props) {
             alignItems: 'center',
             gap: 6,
           }}>
-            <Trophy size={10} style={{ flexShrink: 0, color: '#ca8a04' }} />
+            <Trophy size={10} style={{ flexShrink: 0, color: '#c2371a' }} />
             {quote.aiReason ?? `Cheapest option for parcels under 2kg to mainland UK`}
           </div>
         </>

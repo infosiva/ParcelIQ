@@ -4,7 +4,9 @@ import Navbar from '@/components/Navbar'
 import FloatingChat from '@/components/FloatingChat'
 import FeedbackWidget from '@/components/FeedbackWidget'
 import Script from 'next/script'
-import { ThemeLoader } from '@/lib/theme-loader-client'
+import { loadSiteTheme, buildThemeStyleTag, buildGa4Snippet } from '@/lib/theme-loader'
+import { AnimatedBg } from '@/components/AnimatedBg'
+import Telemetry from '@/components/Telemetry'
 import { getSiteFlags } from '@/lib/flags'
 
 import { MotionProvider } from "@infosiva/shared-ui/modern";
@@ -26,9 +28,13 @@ export const metadata: Metadata = {
 
 export default async function RootLayout({ children }: { children: React.ReactNode }) {
   const flags = await getSiteFlags('parceliq')
+  const theme = await loadSiteTheme('parceliq')
+  const ga4 = buildGa4Snippet(theme)
   return (
-    <html lang="en">
+    <html lang="en" data-layout={theme?.layout?.archetype ?? 'default'}>
       <head>
+        <style id="site-theme" dangerouslySetInnerHTML={{ __html: buildThemeStyleTag(theme) }} />
+        {ga4 && <script dangerouslySetInnerHTML={{ __html: ga4 }} />}
         <Script
           async
           src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4237294630161176"
@@ -55,16 +61,15 @@ export default async function RootLayout({ children }: { children: React.ReactNo
         />
       </head>
       <body>
-        <ThemeLoader />
-        <div className="bg-mesh" aria-hidden />
+        <AnimatedBg theme={theme} fallback="aurora" />
+        <Telemetry />
         <Navbar />
         <main><MotionProvider>{children}</MotionProvider></main>
         {flags.chatbot && <FloatingChat />}
         <FeedbackWidget siteName="ParcelIQ" position="left" />
-        <footer style={{ textAlign: 'center', padding: '2rem 1rem', fontSize: '0.8125rem', color: 'rgba(6,78,59,0.40)', borderTop: '1px solid rgba(202,138,4,0.10)' }}>
-          <p>© 2025 ParcelIQ · Prices are indicative — confirm at carrier website before shipping · <a href="/learn" style={{ color: 'rgba(202,138,4,0.70)', textDecoration: 'none' }}>Shipping Guide</a> · <a href="/privacy" style={{ color: 'rgba(202,138,4,0.70)', textDecoration: 'none' }}>Privacy</a></p>
+        <footer style={{ textAlign: 'center', padding: '2rem 1rem', fontSize: '0.8125rem', color: 'var(--text-3)', borderTop: '1px solid var(--border-2)' }}>
+          <p>© 2026 ParcelIQ · Prices are indicative — confirm at carrier website before shipping · <a href="/learn" style={{ color: 'var(--accent)', textDecoration: 'none' }}>Shipping Guide</a> · <a href="/privacy" style={{ color: 'var(--accent)', textDecoration: 'none' }}>Privacy</a></p>
         </footer>
-        <Script defer data-site="parceliq.app" src="http://31.97.56.148:3098/t.js" strategy="afterInteractive" />
       </body>
     </html>
   )

@@ -1,18 +1,18 @@
 @import "tailwindcss";
 
 :root {
-  --bg:        #fefce8;
+  --bg:        #fbf6ee;
   --surface:   #ffffff;
-  --surface-2: #fffdf0;
-  --surface-3: #fef9c3;
-  --border:    rgba(202,138,4,0.15);
-  --border-2:  rgba(202,138,4,0.08);
-  --text:      #422006;
-  --text-2:    rgba(66,32,6,0.75);
-  --text-3:    rgba(66,32,6,0.50);
-  --accent:    #ca8a04;
-  --accent-2:  #a16207;
-  --accent-dim: rgba(202,138,4,0.10);
+  --surface-2: #fff9f1;
+  --surface-3: #f6e9d6;
+  --border:    rgba(194,55,26,0.15);
+  --border-2:  rgba(194,55,26,0.08);
+  --text:      #2a1710;
+  --text-2:    rgba(42,23,16,0.75);
+  --text-3:    rgba(42,23,16,0.50);
+  --accent:    #c2371a;
+  --accent-2:  #9c2a12;
+  --accent-dim: rgba(194,55,26,0.10);
   --green:     #059669;
   --green-dim: rgba(5,150,105,0.10);
   --amber:     #d97706;
@@ -36,14 +36,6 @@ body {
   min-height: 100dvh;
 }
 
-/* ── Background mesh ──────────────────────────────────── */
-.bg-mesh {
-  position: fixed; inset: 0; z-index: -1; pointer-events: none;
-  background:
-    radial-gradient(ellipse 60% 50% at 20% 20%, rgba(202,138,4,0.05) 0%, transparent 60%),
-    radial-gradient(ellipse 50% 60% at 80% 80%, rgba(161,98,7,0.04) 0%, transparent 60%),
-    var(--bg);
-}
 
 /* ── Glass cards ──────────────────────────────────────── */
 .card {
@@ -83,7 +75,7 @@ body {
 
 select.input-field {
   appearance: none;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%23ca8a04' stroke-width='2'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%23c2371a' stroke-width='2'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
   background-repeat: no-repeat;
   background-position: right 0.75rem center;
   padding-right: 2.25rem;
@@ -108,19 +100,19 @@ select.input-field {
   display: inline-flex; align-items: center; gap: 0.5rem;
   background: var(--accent-dim);
   color: var(--accent);
-  border: 1px solid rgba(202,138,4,0.20);
+  border: 1px solid rgba(194,55,26,0.20);
   border-radius: 10px;
   padding: 0.6rem 1.1rem;
   font-size: 0.875rem; font-weight: 500;
   cursor: pointer;
   transition: background 0.15s;
 }
-.btn-ghost:hover { background: rgba(202,138,4,0.16); }
+.btn-ghost:hover { background: rgba(194,55,26,0.16); }
 
 /* ── Carrier badge colours ───────────────────────────── */
 .badge-fast  { background: var(--green-dim);  color: var(--green);  border: 1px solid rgba(5,150,105,0.2); }
 .badge-cheap { background: var(--amber-dim);  color: var(--amber);  border: 1px solid rgba(217,119,6,0.2); }
-.badge-track { background: var(--accent-dim); color: var(--accent); border: 1px solid rgba(202,138,4,0.2); }
+.badge-track { background: var(--accent-dim); color: var(--accent); border: 1px solid rgba(194,55,26,0.2); }
 .badge-eco   { background: rgba(5,150,105,0.06); color: #059669; border: 1px solid rgba(5,150,105,0.2); }
 
 .badge {
@@ -131,7 +123,7 @@ select.input-field {
 
 /* ── Price highlight ──────────────────────────────────── */
 .price-best {
-  background: linear-gradient(135deg, #ca8a04, #a16207);
+  background: linear-gradient(135deg, #c2371a, #9c2a12);
   -webkit-background-clip: text; -webkit-text-fill-color: transparent;
 }
 
@@ -141,8 +133,8 @@ select.input-field {
 
 /* ── AI recommendation card ───────────────────────────── */
 .ai-card {
-  background: linear-gradient(135deg, rgba(202,138,4,0.06), rgba(161,98,7,0.04));
-  border: 1px solid rgba(202,138,4,0.18);
+  background: linear-gradient(135deg, rgba(194,55,26,0.06), rgba(156,42,18,0.04));
+  border: 1px solid rgba(194,55,26,0.18);
   border-radius: 16px;
 }
 
@@ -209,3 +201,12 @@ select.input-field {
 ::-webkit-scrollbar { width: 4px; }
 ::-webkit-scrollbar-track { background: transparent; }
 ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
+
+.display { font-family: Georgia, 'Times New Roman', serif; }
+.step-in { opacity: 0; transform: translateY(8px); animation: fadeUp .5s ease forwards; }
+
+/* hub archetype variants (data-layout set from Edge Config theme layout.archetype) */
+[data-layout="editorial"] .card, [data-layout="editorial"] [class*="card"] { border-radius: 4px; }
+[data-layout="soft"] .card, [data-layout="soft"] [class*="card"] { border-radius: 28px; }
+[data-layout="editorial"] h1, [data-layout="editorial"] h2 { letter-spacing: -0.03em; }
+[data-layout="centered"] main { text-align: center; }

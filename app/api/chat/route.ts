@@ -1,31 +1,18 @@
 import { NextRequest, NextResponse } from 'next/server'
-import Groq from 'groq-sdk'
 import { AI_LIMITER } from '@/lib/rateLimit'
+import { chatChain } from '@/lib/chat-chain'
 
-let _groq: Groq | null = null
-function groq(): Groq {
-  if (!_groq) _groq = new Groq({ apiKey: process.env.GROQ_API_KEY! })
-  return _groq
-}
+const SYSTEM = 'You are the ParcelIQ assistant, a UK parcel shipping helper. Help with choosing between Royal Mail, DPD, Evri, DHL and Parcelforce, packaging, customs and tracking. Be concise. You do not know live prices: tell users to confirm at the carrier. If asked anything outside UK parcel shipping, reply: "I\'m trained for ParcelIQ. For that, try Google or ChatGPT!"'
 
 export async function POST(req: NextRequest) {
   const limited = AI_LIMITER.check(req); if (limited) return limited
-
   try {
-    const { messages, system } = await req.json()
-    const sysPrompt = system ?? 'You are ParcelIQ AI — a UK shipping expert. Help users compare Royal Mail, DPD, Evri, DHL, Parcelforce. Give practical advice on cheapest/fastest options, packaging, customs, tracking. Be concise and actionable.'
-
-    const res = await groq().chat.completions.create({
-      model: 'qwen/qwen3.8-27b',
-      messages: [{ role: 'system', content: sysPrompt }, ...messages],
-      max_tokens: 400,
-      temperature: 0.6,
-    })
-
-    const text = res.choices[0]?.message?.content ?? 'Let me help you find the best shipping option!'
-    return NextResponse.json({ text })
+    const { messages } = await req.json()
+    const safe = (Array.isArray(messages) ? messages : []).slice(-10).map((m: { role?: string; content?: unknown }) => ({ role: m.role === 'assistant' ? 'assistant' : 'user', content: String(m.content ?? '').slice(0, 1000) })) as { role: 'user' | 'assistant'; content: string }[]
+    const out = await chatChain([{ role: 'system', content: SYSTEM }, ...safe])
+    return NextResponse.json({ text: out?.text ?? 'The assistant is busy right now. Use the comparison tool to see options, then confirm prices at the carrier.' })
   } catch (e) {
-    console.error('[parceliq][chat]', e)
-    return NextResponse.json({ text: 'Use the comparison tool above to get instant quotes!' }, { status: 200 })
+    console.error(JSON.stringify({ level: 'error', scope: 'parceliq.chat', message: String((e as Error)?.message).slice(0, 200) }))
+    return NextResponse.json({ text: 'The assistant is busy right now. Use the comparison tool to see options.' })
   }
 }
